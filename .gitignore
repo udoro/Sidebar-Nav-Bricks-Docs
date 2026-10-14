@@ -1,0 +1,5 @@
+# Run folders and scratch files made while testing the skills.
+ai-connector/*-run/
+
+# A user's own context file, kept next to the skills on their computer.
+ai-connector/sidebar-nav-bricks-skills/sidebar-nav-bricks-user-context.md

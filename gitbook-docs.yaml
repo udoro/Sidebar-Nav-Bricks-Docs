@@ -1,0 +1,29 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: Sidebar Navigation Builder for Bricks
+  structure:
+    - type: section
+      key: section-docs
+      title: Docs
+      path: docs
+      default: true
+      children:
+        - type: space
+          key: space-docs
+          title: Docs
+          path: docs
+          default: true
+          content:
+            directory: ./
+    - type: section
+      key: section-ai-connector
+      title: AI Connector
+      path: ai-connector
+      children:
+        - type: space
+          key: space-ai-connector
+          title: AI Connector
+          path: ai-connector
+          default: true
+          content:
+            directory: ./ai-connector
