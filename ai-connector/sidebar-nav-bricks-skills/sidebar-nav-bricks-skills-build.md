@@ -111,23 +111,30 @@ before any write that adds or removes elements.
 
 ### Read the tree
 
-`bricks/get-page-elements` with the header's `postId`. The engine block's code fields are about
-115 KB: save the response to your working directory and parse it with `node`, instead of reading it
-into the chat. Re-read before every write that depends on the current state.
+`bricks/get-page-elements` with the header's `postId`. For the structure only, pass
+`includeSettings: false`. For one element, pass `elementId` and `maxDepth: 0`. The engine block's
+code fields are about 115 KB: save the response to your working directory and parse it with
+`node`, instead of reading it into the chat. Re-read before every write that depends on the current
+state.
 
 ### Write an element
 
-`bricks/update-element` with `postId`, `elementId` and `settings`. Send the element's complete current
-settings with your change applied, unless the ability's schema says it merges settings. A dropped key
-is a lost setting: `executeCode`, `cssCode`, `_cssGlobalClasses`, `_attributes`.
+`bricks/update-element` with `postId`, `elementId` and `settings`. It merges: send only the keys you
+change. A top-level key sent as `null` or `""` is deleted. To change several elements in one save,
+use `bricks/batch-update-elements`.
 
-Read the tree after the write and confirm the changed key, and that the other keys are unchanged.
+Every save rewrites the whole tree's `_cssCustom`: a rule on `#brxe-<id>` alone that repeats a native
+setting is removed (the setting stays), and other rules are kept but reformatted.
+
+Read the tree after the write. Confirm the changed value equals your expected text exactly, and that
+the other keys are unchanged apart from that `_cssCustom` rewrite.
 
 ### Change a JS option
 
 1. Take the options block's `javascriptCode` from the tree.
-2. Replace the exact text of the one option line, for example `enableOffCanvas: 0,` with
-   `enableOffCanvas: 1,`. Confirm the old text occurs exactly once. Keep comments and spacing.
+2. Replace the exact text of the one option line with its indent and line break, for example
+   `\n    enableOffCanvas: 0,\n` with `\n    enableOffCanvas: 1,\n`. Confirm the old text occurs
+   exactly once. Keep comments and spacing.
 3. Write the whole `javascriptCode` back with `bricks/update-element`.
 
 Breakpoint options keep their form: `window.matchMedia("(max-width: 991px)")`. `reinitOnUrlChange`
@@ -157,7 +164,7 @@ There are two. Confirm both changed.
 
 ### Change a link, text or icon
 
-* Link: the `link` element (tag `a`) inside the `li`: its `link` setting.
+* Link: the block labelled **link** (tag `a`) inside the `li`: its `link` setting.
 * Text: the `text-basic` child with `dwc-nav__link__text`: its `text` setting.
 * Icon: the `icon` child with `dwc-nav__link__icon`: its `icon` setting.
 
@@ -166,12 +173,11 @@ Copy the value shape from an existing element of the same kind in the tree.
 ### Add a menu item
 
 1. Pick an existing item of the same kind (reference section 2). Copy its subtree from the tree.
-2. Give every copied element and every `_attributes` row a new 6-character ID. Keep
-   `_cssGlobalClasses`, `tag`, `customTag` and every other setting.
+2. Leave out every element `id`: `bricks/add-element` makes new ones. Give every `_attributes` row a
+   new 6-character `id`. Keep `_cssGlobalClasses`, `tag`, `customTag` and every other setting.
 3. Change the text, link and, for a slide button, `data-title`.
-4. Add it with `bricks/add-element` under the target **List &lt;ul&gt;**, at the position the user wants.
-   If the schema takes nested children, send the subtree in one call. Otherwise add the parent, then
-   each child under its new parent ID, top-down.
+4. Add it with `bricks/add-element` under the target **List &lt;ul&gt;**, at the position the user wants
+   (`position`, from 0), as one nested `{name, label, settings, children}` tree.
 
 ### Add a slide panel
 
@@ -204,7 +210,9 @@ Three edits, all in one go. Use the user's widths; the desktop width is the mobi
 3. Engine block `cssCode`: `@media (max-width:1024px)` to `@media (max-width:<mobile>px)`.
 
 Confirm each old text occurs exactly once before you replace it. This is the only write to the engine
-block. If off-canvas is limited to mobile through `offCanvasBreakpoint`, change it to match.
+block. If the engine CSS has `@media (width <= 1024px)` (the admin bar reset), leave it as it is. Send
+both blocks in one `bricks/batch-update-elements` call, then compare each field's read-back with your
+expected text. If off-canvas is limited to mobile through `offCanvasBreakpoint`, change it to match.
 
 Never raise the breakpoint to get the menu button on desktop: set `enableOffCanvas` to `1`.
 
@@ -259,8 +267,10 @@ template. Each header carries its own options and hide rules.
 * Mega Menu Pro while it is a **Header** template: the MMPro AI Abilities plugin (`mmpro/*`) and the
   Mega Menu Pro Bricks skill (`mmpro-bricks-skills/mega-menu-pro-bricks-skills.md`), if both are in the
   project.
-* Mega Menu Pro once it is a **Section** template: nothing. `mmpro/*` returns `not_header`, and Bricks'
-  element abilities reject Mega Menu Pro's Nav (Nestable) tree. Give the user builder steps.
+* Mega Menu Pro once it is a **Section** template: only `mmpro/set-template-type`. Other `mmpro/*`
+  abilities return `not_header`, and Bricks' element abilities reject Mega Menu Pro's Nav (Nestable)
+  tree. To change it, switch it to header, make the change, and switch it back. The Template element
+  shows nothing in between.
 
 **Steps, in order:**
 
@@ -273,21 +283,31 @@ template. Each header carries its own options and hide rules.
    `1025`. Without it, give the user the steps from
    https://design-with-cracka.gitbook.io/bricksmegamenupro/menu-options#breakpoint. Make every other
    Mega Menu Pro change the user wants now, for the same reason.
-3. **User step: make it a Section template.** In WordPress, **Bricks > Templates**, **Edit** (not
-   Edit with Bricks) on the Mega Menu Pro template, **Template Type** from **Header** to **Section**,
-   **Update**. Wait for the user, then confirm the type with `bricks/get-template`. Its header
-   conditions stop applying.
+3. **Make it a Section template** with `mmpro/set-template-type`, `type: "section"` (MMPro AI
+   Abilities 0.5.0 or later). If the template has conditions, it refuses until you pass
+   `acknowledgeConditions: true`. Ask the user first: it stops showing as the site's header. Without
+   that ability, it is a user step: in WordPress, **Bricks > Templates**, **Edit** (not Edit with
+   Bricks) on the Mega Menu Pro template, **Template Type** from **Header** to **Section**, **Update**.
+   Wait for the user, then confirm with `bricks/list-templates`, type `section`.
 4. **Add the Template element** with `bricks/add-element`: `postId` the sidebar header, parent the
    Header inner wrap, position just before the Hamburger Wrapper, element
    `{ name: "template", settings: { template: "<Mega Menu Pro post ID>", _width: "auto" } }`. One shared
    Mega Menu Pro template for every sidebar header: never copy its elements into a header.
 5. **Options** in the sidebar's options block, for the layout. Both layouts: set `data-topbar-active`
    to `"true"` on the root block.
-6. **Spacing.** Measure the Header inner wrap's height on desktop. If it is taller than Mega Menu Pro's
-   row needs, propose `--sidebar-header-block-padding: 0px`. Position the logo, Template element and
-   Hamburger Wrapper with the Header inner wrap's flex settings (`_justifyContent`, `_alignItems`),
-   never with margins.
-7. **Layout A hide rules**, in the Header inner wrap's `_cssCustom` (append to what is there), with the
+6. **Spacing.** Add to the Header inner wrap's `_cssCustom`, for both layouts:
+
+   ```css
+   #brxe-<header inner wrap ID> > .brxe-template { flex: 1 1 0; min-width: 0; }
+   ```
+
+   Remove the bar's block padding where Mega Menu Pro shows, or its dropdowns open inside the bar.
+   Layout B: `--sidebar-header-block-padding: 0px` in the options block. Layout A: in the Header
+   inner wrap's `_cssCustom`,
+   `@media (min-width: 1025px) { #brxe-<header inner wrap ID> { --sidebar-header-block-padding: 0px; } }`,
+   so the mobile bar keeps its padding. Position the logo, Template element and Hamburger Wrapper
+   with the Header inner wrap's flex settings (`_justifyContent`, `_alignItems`), never with margins.
+7. **Layout A rules**, in the Header inner wrap's `_cssCustom` (append to what is there), with the
    real widths and the element's ID:
 
    ```css
@@ -295,14 +315,17 @@ template. Each header carries its own options and hide rules.
      #brxe-<header inner wrap ID> .dwc-hamburger-wrap { display: none; }
    }
    @media (max-width: 1024px) {
-     #brxe-<header inner wrap ID> .dwc-menu-wrap { display: none; }
+     #brxe-<header inner wrap ID> > .brxe-template { display: none; }
    }
    ```
 
    They live in this header, so a layout B header with the same Mega Menu Pro template is unaffected.
    Never put them in the Mega Menu Pro template or on the Template element.
-8. **One logo.** If the sidebar's Logo and Mega Menu Pro's Logowrap (link) both show, ask which to
-   keep. Hide or remove the sidebar's Logo yourself; changes to Mega Menu Pro's logo are builder steps.
+8. **One logo.** Where Mega Menu Pro shows, recommend its logo: it sits inside its container. To hide
+   the sidebar's Logo there, layout B: `#brxe-<header inner wrap ID> > .brxe-logo { display: none; }`;
+   layout A: the same rule inside the `@media (min-width: 1025px)` block. If the user keeps the
+   sidebar's Logo next to Mega Menu Pro, add
+   `#brxe-<header inner wrap ID> > .brxe-logo { flex-shrink: 0; }`.
 
 **Mega Menu Pro problems inside the sidebar:**
 
@@ -311,6 +334,8 @@ template. Each header carries its own options and hide rules.
 * Both menus, or neither, between two widths: the breakpoints differ. Measure where `<html>` gets
   `dwc-mobile` (Mega Menu Pro) and where `<body>` gets it (sidebar).
 * Mega Menu Pro missing from the Template element's list: it is still a Header template (step 3).
+* Mega Menu Pro's logo is empty: the template file's SVG points to the site it came from. Import it
+  with `logoAttachmentId`, or set the logo in the builder.
 
 ***
 
@@ -379,6 +404,8 @@ try {
 ```
 
 * Never attach to the user's own Chrome or ask them to relaunch theirs with a debugging port.
+* Elements without their own styles have no `id` on the page: find them by class or text. Only
+  elements with element-level styles or `_cssCustom` get `id="brxe-<id>"`.
 * **The sidebar's code is running** when `<body>` has `sidebar-ready`. If not, the code blocks did not
   run: stop and tell the user (entry file, invariants).
 * **Options:** `sidebar.config.<option>` in the page is the live value.

@@ -70,13 +70,16 @@ every write, or inventory anything you are not touching.
   contains `const DWCSidebarConfig`). Options are in its `javascriptCode`, variables in its `cssCode`.
   The engine block (`class DWCSidebarNavigation`) holds product code: never change it, except the
   documented breakpoint change. To change behaviour beyond options and variables, add your own CSS.
-* **Change one value with a targeted replace.** Replace the exact text of that one line, confirm it
-  occurs once, and write the whole field back. Never rewrite or reformat the rest of the field.
-* **Send complete settings.** On `bricks/update-element`, send the element's full current settings
-  with your change applied, unless the ability's schema says it merges.
+* **Change one value with a targeted replace.** Replace the exact text of that one line, with its
+  indent and line break, confirm it occurs once, and write the whole field back. The commented
+  `urlConfigMap` example repeats option lines such as `enableCollapsibleSidebar: 0,`. Never rewrite
+  or reformat the rest of the field.
+* **`bricks/update-element` merges.** Send only the keys you change. A top-level key sent as `null`
+  or `""` is deleted.
 * **Options are `1` or `0`**, except `reinitOnUrlChange` (`true`/`false`) and the breakpoints
   (`window.matchMedia("(max-width: Npx)")`).
-* **Attributes: on is `"true"`, off is `""`.** Keep the attribute row and its `id`.
+* **Attributes: on is `"true"`, off is `""`.** A row with no `value` is off too. Send the whole
+  `_attributes` list: it replaces the stored one. Keep every row and its `id`.
 * **Element IDs and global class IDs are site-local.** Resolve them from the live tree every
   session. Never use an ID from any document, including this one.
 * **A slide button opens the panel with the same `data-title`.** Exact match, unique per panel,
