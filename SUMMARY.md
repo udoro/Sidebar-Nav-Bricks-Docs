@@ -7,6 +7,7 @@
 * [Attributes & Classes](attributes-and-classes.md)
 * [Styling](styling.md)
 * [Troubleshooting](troubleshooting.md)
+* [Changelog](changelog.md)
 
 ## Guides
 
