@@ -4,15 +4,15 @@ icon: sparkles
 
 # AI Skills Reference Tables
 
-Sidebar Navigation Builder for Bricks, version 3.0.2. Grep the section you need. Never read this file in full.
+Sidebar Navigation Builder for Bricks, version 3.0.3. Grep the section you need. Never read this file in full.
 
 Customer docs: https://design-with-cracka.gitbook.io/sidebarnavbricks
 
 ## 1. Fingerprint
 
-* Root element: `block`, label `Sidebar Nav 3.0.2`, global classes `dwc-sidebar` and `dwc-offcanvas-header`.
+* Root element: `block`, label `Sidebar Nav 3.0.3`, global classes `dwc-sidebar` and `dwc-offcanvas-header`.
 * Options code block: `code` element whose `javascriptCode` contains `const DWCSidebarConfig`. Template label `Sidebar Options CSS/JS`. First child of the root.
-* Engine code block: `code` element whose `javascriptCode` contains `class DWCSidebarNavigation`. Template label `Sidebar CSS and JS`. Last child of the root. Its last line logs `<Sidebar Nav Builder v3.0.2>`.
+* Engine code block: `code` element whose `javascriptCode` contains `class DWCSidebarNavigation`. Template label `Sidebar CSS and JS`. Last child of the root. Its last line logs `<Sidebar Nav Builder v3.0.3>`.
 * Template settings: `headerPosition` `left` (or `right`), `headerWidth` `var(--sidebar-width)`.
 * The import adds 4 global variables in the category "AT - Clamp Settings": `min-viewport`, `max-viewport`, `base-font`, `clamp-unit`. Never remove them.
 
@@ -24,7 +24,7 @@ Labels are the template's. Users can rename them: match by global class first.
 
 | Label | Element | Tag | Global classes | Attributes | Notes |
 | --- | --- | --- | --- | --- | --- |
-| Sidebar Nav 3.0.2 | block | div | `dwc-sidebar`, `dwc-offcanvas-header` | section 4 | Root. |
+| Sidebar Nav 3.0.3 | block | div | `dwc-sidebar`, `dwc-offcanvas-header` | section 4 | Root. |
 | Sidebar Options CSS/JS | code | | | | The one code block you edit. |
 | Header inner wrap | block | div | `dwc-header-inner-wrap` | | Top of the sidebar; the top bar with `enableTopBar` or `enableOffCanvas`. Children: Logo, Hamburger Wrapper, Collapse toggle. Mega Menu Pro's Template element goes here. |
 | (Logo) | logo | | `dwc-sidebar__logo` | | |
@@ -105,7 +105,7 @@ const urlConfigMap = {
 
 ## 4. Attributes
 
-On the root block (`Sidebar Nav 3.0.2`). On: `"true"`. Off: empty value, attribute kept.
+On the root block (`Sidebar Nav 3.0.3`). On: `"true"`. Off: empty value, attribute kept.
 
 | Attribute | Template | On means |
 | --- | --- | --- |
@@ -148,7 +148,7 @@ In `:root` of the options block's `cssCode`. One declaration per line.
 | Focus | `--sidebar-focus-outline-color` (`black`), `--sidebar-focus-outline-width` (`2px`), `--sidebar-focus-outline-offset` (`4px`) |
 | Dropdown levels | `--lvl-2-indent`, `--lvl-3-indent`; `--lvl-1/2/3-toggle-bg-active`; `--lvl-1/2/3-content-bg`; `--lvl-2/3-toggle-color-active`; `--lvl-1/2/3-icon-color`; `--lvl-2/3-icon-hover-color`; `--lvl-1/2/3-icon-size` (level 1 `var(--sidebar-link-icon-size)`, levels 2 and 3 `calc(var(--sidebar-link-icon-size) * 0.75)`) |
 
-Read by nothing in 3.0.2, so changing them does nothing: `--sidebar-cta-hover-color`, `--skip-link-color`, `--skip-link-background`, `--lvl-1-toggle-color-active`, `--lvl-1-icon-hover-color`. The CTA's hover text color is set on the `dwc-cta` class (`#ffffff`).
+Read by nothing in 3.0.3, so changing them does nothing: `--sidebar-cta-hover-color`, `--skip-link-color`, `--skip-link-background`, `--lvl-1-toggle-color-active`, `--lvl-1-icon-hover-color`. The CTA's hover text color is set on the `dwc-cta` class (`#ffffff`).
 
 Collapsed auto width, in the `.dwc-auto-width` rule below `:root`:
 `--sidebar-collapse-width: calc((var(--sidebar-panel-inline-padding) * 2) + (var(--sidebar-link-inline-padding) * 2) + (var(--sidebar-link-icon-size) * var(--icon-size-multiplier)))`, with `--icon-size-multiplier: 0.8`. Set the multiplier to the rendered icon width divided by `--sidebar-link-icon-size`. Measured at template values: 67px.
@@ -174,7 +174,7 @@ On `<body>`:
 
 On elements: `dwc-current-menu-item` on the current page's link; `dwc-slide-left` on a panel moved out to the left, `dwc-slide-right` on a closed panel (open panel: neither); `level-1`, `level-2`... on dropdown toggles; panels get `inert` while closed and `aria-label` `<data-title> menu`.
 
-Helper class: `dwc-hide` (opacity 0 while collapsed). `dwc-fade` and `dwc-show` have no effect in 3.0.2: don't use them.
+Helper class: `dwc-hide` (opacity 0 while collapsed). `dwc-fade` and `dwc-show` have no effect in 3.0.3: don't use them.
 
 ## 7. Code block fields
 

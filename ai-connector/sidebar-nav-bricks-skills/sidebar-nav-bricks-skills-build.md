@@ -251,6 +251,9 @@ preview.
 Mega Menu Pro **Lite** goes inside the sidebar's **Header inner wrap** as a Section template, through a
 Template element. Customer guide: https://design-with-cracka.gitbook.io/sidebarnavbricks/guides/mega-menu-pro
 
+If a page has both the sidebar and Mega Menu Pro's Tabbed Navigation, Tabbed Navigation must be 1.3.2
+or later. Older versions stop one of the two from loading.
+
 **Layouts** (ask in the gate):
 
 * **A. Mega Menu Pro on desktop, sidebar on mobile:** `enableOffCanvas: 1`, plus the hide rules in

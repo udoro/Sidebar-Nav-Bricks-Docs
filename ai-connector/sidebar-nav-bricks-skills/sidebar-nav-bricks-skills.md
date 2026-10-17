@@ -105,7 +105,7 @@ every write, or inventory anything you are not touching.
 Record the post ID and the IDs of the root block, the options block, the Header inner wrap, Nav and
 the Home panel.
 
-The root label carries the version: `Sidebar Nav 3.0.2`. The reference describes 3.0.2. For any other
+The root label carries the version: `Sidebar Nav 3.0.3`. The reference describes 3.0.3. For any other
 version, compare the live option names and attributes with the reference. Where they differ, the live
 code is authoritative and the reference is not.
 
