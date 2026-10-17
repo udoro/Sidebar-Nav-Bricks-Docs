@@ -6,6 +6,13 @@ icon: clock-rotate-left
 
 You'll find every version's template in your Gumroad library.
 
+## 3.0.3 - October 17, 2026
+
+### Fixed
+
+- **Page transitions in Chrome and Edge.** The sidebar now updates after the new page loads, as it already did in other browsers.
+- **With Tabbed Navigation.** The sidebar and Mega Menu Pro's Tabbed Navigation now both load on the same page. You need Tabbed Navigation 1.3.2 for this.
+
 ## 3.0.2 - October 16, 2026
 
 ### New

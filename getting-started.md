@@ -67,7 +67,7 @@ The template sits on the left of the page. To move it to the right:
 ## What's inside the template
 
 ```
-Sidebar Nav 3.0.2               (block: the sidebar attributes)
+Sidebar Nav 3.0.3               (block: the sidebar attributes)
 ├── Sidebar Options CSS/JS      (code block: your JS options and CSS variables)
 ├── Header inner wrap           (top of the sidebar, or the top bar)
 │   ├── Logo
@@ -93,4 +93,4 @@ Sidebar Nav 3.0.2               (block: the sidebar attributes)
 
 * You build your menu inside **Nav**. See [Building the Navigation](building-the-navigation.md).
 * You only edit the **Sidebar Options CSS/JS** code block. See [Sidebar Options](sidebar-options.md) and [Styling](styling.md).
-* The **Sidebar Nav 3.0.2** block holds a few attributes. See [Attributes & Classes](attributes-and-classes.md).
+* The **Sidebar Nav 3.0.3** block holds a few attributes. See [Attributes & Classes](attributes-and-classes.md).

@@ -6,7 +6,7 @@ icon: pen-to-square
 
 **Sidebar Navigation Builder for Bricks** is a header template for Bricks Builder. It gives you a sidebar menu with sliding panels, dropdowns you can nest, a collapsible mode, an off-canvas mode, a top bar and a mobile menu.
 
-This documentation covers version **3.0.2**.
+This documentation covers version **3.0.3**.
 
 ***
 
@@ -37,13 +37,13 @@ You change the sidebar in three places:
 
 1. **JavaScript options** in the JS tab of the **Sidebar Options CSS/JS** code block. These turn features on and off, such as the collapsible sidebar or off-canvas mode. See [Sidebar Options](sidebar-options.md).
 2. **CSS variables** in the CSS tab of the same code block. These set colors, sizes and spacing. See [Styling](styling.md).
-3. **Attributes** on the **Sidebar Nav 3.0.2** block, the top element of the template. See [Attributes & Classes](attributes-and-classes.md).
+3. **Attributes** on the **Sidebar Nav 3.0.3** block, the top element of the template. See [Attributes & Classes](attributes-and-classes.md).
 
 You don't need to touch the **Sidebar CSS and JS** code block, except to [change the breakpoint](sidebar-options.md#change-the-breakpoint).
 
 ### Change an attribute
 
-1. In the builder, select the **Sidebar Nav 3.0.2** block in the Structure panel.
+1. In the builder, select the **Sidebar Nav 3.0.3** block in the Structure panel.
 2. Open the **Style** tab, then **Attributes**.
 3. Find the attribute by its **Name** and change its **Value**.
 

@@ -6,7 +6,7 @@ icon: tags
 
 ## Sidebar attributes
 
-These attributes are on the **Sidebar Nav 3.0.2** block, the top element of the template. To change one, see [Change an attribute](README.md#change-an-attribute).
+These attributes are on the **Sidebar Nav 3.0.3** block, the top element of the template. To change one, see [Change an attribute](README.md#change-an-attribute).
 
 Set the value to `true` to turn an attribute on. Clear the value to turn it off.
 
