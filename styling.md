@@ -205,7 +205,7 @@ A dropdown inside a dropdown is level 2, and one inside that is level 3. By defa
 | `--lvl-2-indent`, `--lvl-3-indent` | `var(--sidebar-dropdown-link-indent)` | Indent of each level. |
 | `--lvl-1-toggle-bg-active`, `--lvl-2-toggle-bg-active`, `--lvl-3-toggle-bg-active` | `var(--sidebar-link-hover-bg)` | Background of an open dropdown's toggle. |
 | `--lvl-1-content-bg`, `--lvl-2-content-bg`, `--lvl-3-content-bg` | `var(--sidebar-dropdown-content-bg)` | Background of an open dropdown. |
-| `--lvl-2-toggle-color-active`, `--lvl-3-toggle-color-active` | `var(--sidebar-link-color)` | Text color of an open dropdown's toggle. |
+| `--lvl-1-toggle-color-active`, `--lvl-2-toggle-color-active`, `--lvl-3-toggle-color-active` | `var(--sidebar-link-color)` | Text color of an open dropdown's toggle. |
 | `--lvl-1-icon-color`, `--lvl-2-icon-color`, `--lvl-3-icon-color` | `var(--sidebar-chevron-color)` | Chevron color. |
 | `--lvl-2-icon-hover-color`, `--lvl-3-icon-hover-color` | `var(--sidebar-link-icon-hover-color)` | Chevron color on hover. |
 | `--lvl-1-icon-size` | `var(--sidebar-link-icon-size)` | Icon size at level 1. |

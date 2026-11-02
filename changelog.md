@@ -6,6 +6,21 @@ icon: clock-rotate-left
 
 You'll find every version's template in your Gumroad library.
 
+## 3.0.4 - November 2, 2026
+
+### Improved
+
+- **Nested dropdowns.** They keep their full width now, instead of getting narrower at each level.
+
+### Fixed
+
+- **Blocked cookies.** The sidebar now works for visitors whose browser blocks cookies. Before, its slide buttons did nothing.
+- **Links in the mobile menu.** A link to a section on the same page now closes the mobile menu in every layout, not only in off-canvas.
+- **Long menus.** When an open dropdown makes the menu taller than the screen, you can scroll down to the last items again. This is with the `data-push-footer` attribute on, which is the default.
+- **Split dropdowns.** With the `data-partition-dropdown` attribute on, the chevron sits in the middle of its box, and SVG chevrons change color on hover.
+- **Nested dropdown labels.** The gap between a nested dropdown's icon and its text now matches the other items.
+- **Level 1 colors.** The `--lvl-1-toggle-color-active` variable now sets the text color of an open level 1 dropdown. An open dropdown under the mouse uses the hover colors, so its text stays readable.
+
 ## 3.0.3 - October 17, 2026
 
 ### Fixed
